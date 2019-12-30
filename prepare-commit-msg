@@ -1,0 +1,13 @@
+#!/bin/bash
+
+BRANCH=`git branch | grep '^\*' | cut -b3-`
+FILE=`cat "$1"`
+PREFIX=$(echo $FILE | cut -d: -f1)
+MSG=$(echo $FILE | cut -d: -f2)
+
+if [ "$PREFIX" = "$MSG" ]
+then
+    echo "($BRANCH) $MSG" > "$1"
+else
+    echo "$PREFIX($BRANCH):$MSG" > "$1"
+fi
